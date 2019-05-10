@@ -1,0 +1,26 @@
+package com.cos.around.Model;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import lombok.Data;
+
+@Data
+@Entity
+public class Tags {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int tagNum;
+	
+	@Column(nullable = false, length = 60)
+	private String tagName;
+	
+	@OneToMany(mappedBy="tag")
+	private List<InsertTag> insertTag;
+}
