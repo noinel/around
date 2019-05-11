@@ -11,29 +11,25 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 
 @Data
-@Entity
-@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
-public class Feeling {
+@Component
+public class FeelingDTO {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private int feelingNum;
 	
-	@Column(nullable = false, length = 60)
+
 	private String feelingName;
-	@Column(nullable = false)
+
 	private String feelingEmoticon;
 	
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "feeling")
+
 	private List<Board> board;
 	
 	

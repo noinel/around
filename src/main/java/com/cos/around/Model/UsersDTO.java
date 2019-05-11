@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -25,52 +26,34 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 @Data
-@Entity
-@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
-public class Users {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Component
+public class UsersDTO {
 	private int userNum;
-	@Column(nullable = false)
+
 	private int userAge;
-	@Column(nullable = false)
+
 	private String userGender;
-	
 
-	
-	@ManyToOne
-	@JoinColumn(name="userSearchRegionNum")
 	private Region userSearchRegion;
-	
-	
 
-	@ManyToOne	
-	@JoinColumn(name="userRegionNum")
 	private Region userRegion;
-	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+
 	private List<Heart> heart;
-	
-	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+
 	private List<Board> board;
-	
-	
-	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+
 	private List<Reply> reply;
+
 	
-	
-	@Column(nullable = false, length = 50)
 	private String userEmail;
-	@Column(nullable = false)
+	
 	private int userSearchMinAge;
-	@Column(nullable = false)
+	
 	private int userSearchMaxAge;
-	@Column(nullable = false)
+	
 	private int userActivate;
-	@Column(nullable = false)
+	
 	private Timestamp userCreateDate;
-	@Column(nullable = false)
+	
 	private Timestamp userUpdateDate;
 }

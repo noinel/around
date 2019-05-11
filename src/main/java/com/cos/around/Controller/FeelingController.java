@@ -10,49 +10,50 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cos.around.Model.Heart;
-import com.cos.around.Repository.HeartRepository;
+import com.cos.around.Model.Feeling;
+import com.cos.around.Repository.FeelingRepository;
+
 
 @RestController
-@RequestMapping("/heart")
-public class HeartController {
+@RequestMapping("/feeling")
+public class FeelingController {
 	
 	@Autowired
-	HeartRepository heartRepository;
+	FeelingRepository feelingRepository;
 	
 	@PostMapping("/test/save")
-	public Heart save(Heart heart) {
+	public Feeling save(Feeling feeling) {
 
 		
-		return heartRepository.save(heart); 
+		return feelingRepository.save(feeling); 
 	}
 	@GetMapping("/test/findall")
-	public List<Heart> findAll() {
+	public List<Feeling> findAll() {
 
 		
-		return heartRepository.findAll(); 
+		return feelingRepository.findAll(); 
 	}
 	@GetMapping("/test/findby/{num}")
-	public Heart findByID(@PathVariable int num) {
+	public Feeling findByID(@PathVariable int num) {
 
-		Optional<Heart> opR = heartRepository.findById(num);
+		Optional<Feeling> opR = feelingRepository.findById(num);
 		if(opR.isPresent()) {
-		Heart heart = opR.get();
-		return heart;
+		Feeling feeling = opR.get();
+		return feeling;
 		}
 		return null;
 		 
 	}
 	@PostMapping("/test/update")
-	public Heart update(Heart heart ) {
-		System.out.println(heart.getHeartNum());
+	public Feeling update(Feeling feeling ) {
 		
-		return heartRepository.save(heart); 
+		
+		return feelingRepository.save(feeling); 
 	}
 	@PostMapping("/test/delete/{num}")
 	public String delete(@PathVariable int num) {
 		
-		heartRepository.deleteById(num);
+		feelingRepository.deleteById(num);
 		  
 		return " \"delete\" : "+num;
 	}

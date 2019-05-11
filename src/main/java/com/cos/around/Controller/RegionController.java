@@ -46,7 +46,7 @@ public class RegionController {
 	}
 	@PostMapping("/test/update")
 	public Region update(Region region ) {
-		System.out.println(region.getRegionNum());
+		
 		
 		return regionRepository.save(region); 
 	}

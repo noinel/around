@@ -11,24 +11,18 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 
 @Data
-@Entity
-@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
-public class Tags {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Component
+public class TagsDTO {
 	private int tagNum;
 	
-	@Column(nullable = false, length = 60)
+
 	private String tagName;
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy="tag")
 	private List<InsertTag> insertTag;
 }

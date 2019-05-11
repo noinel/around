@@ -12,10 +12,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.Data;
 
 @Data
 @Entity
+@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
 public class Reply {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +36,7 @@ public class Reply {
 	@Column(nullable = false)
 	private Timestamp replyUpdateDate;
 	
+	
 	@ManyToOne
 	@JoinColumn(name="boardNum")
 	private Board board;
@@ -37,7 +44,6 @@ public class Reply {
 	@ManyToOne
 	@JoinColumn(name="toReplyNum")
 	private Reply toReply;
-	
 	@ManyToOne
 	@JoinColumn(name="userNum")
 	private Users user;
