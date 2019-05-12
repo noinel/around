@@ -1,14 +1,11 @@
 package com.cos.around.Model;
 
 import java.sql.Timestamp;
-import java.util.List;
-
-import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
 @Data
-@Component
+
 public class BoardDTO {
 
 	private int boardNum;
@@ -21,15 +18,10 @@ public class BoardDTO {
 
 	private Timestamp boardUpdateDate;
 
-	private int userNum;
-
 	private Region boardRegion;
 
-	private int feelingNum;
+	private Users user;
 
-	private List<Integer> heartNums;
+	private Feeling feeling;
 
-	private List<Integer> replyNums;
-
-	private List<Integer> insertTagNums;
 }

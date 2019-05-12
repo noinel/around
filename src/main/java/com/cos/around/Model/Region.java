@@ -6,20 +6,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import lombok.Data;
 
 @Data
 @Entity
-@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
+//@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
 public class Region {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int regionNum;
-	
+
 	@Column(nullable = false, length = 60)
 	private String regionName;
-	
+
 }

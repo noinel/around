@@ -12,23 +12,19 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import lombok.Data;
 
 @Data
 @Entity
-@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
+//@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
 public class Tags {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int tagNum;
-	
+
 	@Column(nullable = false, length = 60)
 	private String tagName;
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy="tag")
+	@OneToMany(mappedBy = "tag")
 	private List<InsertTag> insertTag;
 }

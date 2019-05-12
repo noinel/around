@@ -13,48 +13,48 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cos.around.Model.Tags;
 import com.cos.around.Repository.TagsRepository;
 
-
 @RestController
 @RequestMapping("/tags")
 public class TagsController {
-	
+
 	@Autowired
 	TagsRepository tagRepository;
-	
+
 	@PostMapping("/test/save")
 	public Tags save(Tags tag) {
 
-		
-		return tagRepository.save(tag); 
+		return tagRepository.save(tag);
 	}
+
 	@GetMapping("/test/findall")
 	public List<Tags> findAll() {
 
-		
-		return tagRepository.findAll(); 
+		return tagRepository.findAll();
 	}
+
 	@GetMapping("/test/findby/{num}")
 	public Tags findByID(@PathVariable int num) {
 
 		Optional<Tags> opR = tagRepository.findById(num);
-		if(opR.isPresent()) {
-		Tags tag = opR.get();
-		return tag;
+		if (opR.isPresent()) {
+			Tags tag = opR.get();
+			return tag;
 		}
 		return null;
-		 
+
 	}
+
 	@PostMapping("/test/update")
-	public Tags update(Tags tag ) {
-		
-		
-		return tagRepository.save(tag); 
+	public Tags update(Tags tag) {
+
+		return tagRepository.save(tag);
 	}
+
 	@PostMapping("/test/delete/{num}")
 	public String delete(@PathVariable int num) {
-		
+
 		tagRepository.deleteById(num);
-		  
-		return " \"delete\" : "+num;
+
+		return " \"delete\" : " + num;
 	}
 }

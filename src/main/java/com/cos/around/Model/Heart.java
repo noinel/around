@@ -8,36 +8,33 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 
 @Data
 @Entity
-@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
+//@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
 public class Heart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int heartNum;
-	
-	
 
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="userNum")
+	@JoinColumn(name = "userNum")
 	private Users user;
-	
-	
+
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="boardNum")
+	@JoinColumn(name = "boardNum")
 	private Board board;
-	
-	
+
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="replyNum")
+	@JoinColumn(name = "replyNum")
 	private Reply reply;
-	
+
 	@Column(nullable = false)
 	private int heartStatus;
 }

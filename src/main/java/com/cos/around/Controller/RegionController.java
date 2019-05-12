@@ -13,48 +13,48 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cos.around.Model.Region;
 import com.cos.around.Repository.RegionRepository;
 
-
 @RestController
 @RequestMapping("/region")
 public class RegionController {
-	
+
 	@Autowired
 	RegionRepository regionRepository;
-	
+
 	@PostMapping("/test/save")
 	public Region save(Region region) {
 
-		
-		return regionRepository.save(region); 
+		return regionRepository.save(region);
 	}
+
 	@GetMapping("/test/findall")
 	public List<Region> findAll() {
 
-		
-		return regionRepository.findAll(); 
+		return regionRepository.findAll();
 	}
+
 	@GetMapping("/test/findby/{num}")
 	public Region findByID(@PathVariable int num) {
 
 		Optional<Region> opR = regionRepository.findById(num);
-		if(opR.isPresent()) {
-		Region region = opR.get();
-		return region;
+		if (opR.isPresent()) {
+			Region region = opR.get();
+			return region;
 		}
 		return null;
-		 
+
 	}
+
 	@PostMapping("/test/update")
-	public Region update(Region region ) {
-		
-		
-		return regionRepository.save(region); 
+	public Region update(Region region) {
+
+		return regionRepository.save(region);
 	}
+
 	@PostMapping("/test/delete/{num}")
 	public String delete(@PathVariable int num) {
-		
+
 		regionRepository.deleteById(num);
-		  
-		return " \"delete\" : "+num;
+
+		return " \"delete\" : " + num;
 	}
 }

@@ -13,48 +13,48 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cos.around.Model.InsertTag;
 import com.cos.around.Repository.InsertTagRepository;
 
-
 @RestController
 @RequestMapping("/insertTag")
 public class InsertTagController {
-	
+
 	@Autowired
 	InsertTagRepository insertTagRepository;
-	
+
 	@PostMapping("/test/save")
 	public InsertTag save(InsertTag insertTag) {
 
-		
-		return insertTagRepository.save(insertTag); 
+		return insertTagRepository.save(insertTag);
 	}
+
 	@GetMapping("/test/findall")
 	public List<InsertTag> findAll() {
 
-		
-		return insertTagRepository.findAll(); 
+		return insertTagRepository.findAll();
 	}
+
 	@GetMapping("/test/findby/{num}")
 	public InsertTag findByID(@PathVariable int num) {
 
 		Optional<InsertTag> opR = insertTagRepository.findById(num);
-		if(opR.isPresent()) {
-		InsertTag insertTag = opR.get();
-		return insertTag;
+		if (opR.isPresent()) {
+			InsertTag insertTag = opR.get();
+			return insertTag;
 		}
 		return null;
-		 
+
 	}
+
 	@PostMapping("/test/update")
-	public InsertTag update(InsertTag insertTag ) {
-		
-		
-		return insertTagRepository.save(insertTag); 
+	public InsertTag update(InsertTag insertTag) {
+
+		return insertTagRepository.save(insertTag);
 	}
+
 	@PostMapping("/test/delete/{num}")
 	public String delete(@PathVariable int num) {
-		
+
 		insertTagRepository.deleteById(num);
-		  
-		return " \"delete\" : "+num;
+
+		return " \"delete\" : " + num;
 	}
 }

@@ -16,44 +16,46 @@ import com.cos.around.Repository.HeartRepository;
 @RestController
 @RequestMapping("/heart")
 public class HeartController {
-	
+
 	@Autowired
 	HeartRepository heartRepository;
-	
+
 	@PostMapping("/test/save")
 	public Heart save(Heart heart) {
 
-		
-		return heartRepository.save(heart); 
+		return heartRepository.save(heart);
 	}
+
 	@GetMapping("/test/findall")
 	public List<Heart> findAll() {
 
-		
-		return heartRepository.findAll(); 
+		return heartRepository.findAll();
 	}
+
 	@GetMapping("/test/findby/{num}")
 	public Heart findByID(@PathVariable int num) {
 
 		Optional<Heart> opR = heartRepository.findById(num);
-		if(opR.isPresent()) {
-		Heart heart = opR.get();
-		return heart;
+		if (opR.isPresent()) {
+			Heart heart = opR.get();
+			return heart;
 		}
 		return null;
-		 
+
 	}
+
 	@PostMapping("/test/update")
-	public Heart update(Heart heart ) {
+	public Heart update(Heart heart) {
 		System.out.println(heart.getHeartNum());
-		
-		return heartRepository.save(heart); 
+
+		return heartRepository.save(heart);
 	}
+
 	@PostMapping("/test/delete/{num}")
 	public String delete(@PathVariable int num) {
-		
+
 		heartRepository.deleteById(num);
-		  
-		return " \"delete\" : "+num;
+
+		return " \"delete\" : " + num;
 	}
 }

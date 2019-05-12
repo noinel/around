@@ -19,47 +19,50 @@ import com.cos.around.Utils.MyUtils;
 @RestController
 @RequestMapping("/users")
 public class UsersController {
-	
+
 	@Autowired
 	UsersRepository userRepository;
-	
+
 	@PostMapping("/test/save")
 	public Users save(@RequestBody Users user) {
 
 		user.setUserActivate(1);
 		user.setUserCreateDate(MyUtils.getCurrentTime());
 		user.setUserUpdateDate(MyUtils.getCurrentTime());
-		return userRepository.save(user); 
+		return userRepository.save(user);
 	}
+
 	@GetMapping("/test/findall")
 	public List<Users> findAll() {
 
-		
-		return userRepository.findAll(); 
+		return userRepository.findAll();
 	}
+
 	@GetMapping("/test/findby/{num}")
 	public Users findByID(@PathVariable int num) {
-		
+
 		Optional<Users> opR = userRepository.findById(num);
-		if(opR.isPresent()) {
-		Users user = opR.get();
-		System.out.println(user.getUserRegion().getRegionName());
-		return user;
+		if (opR.isPresent()) {
+			Users user = opR.get();
+			System.out.println(user.getUserRegion().getRegionName());
+			return user;
 		}
 		return null;
-		 
+
 	}
+
 	@PostMapping("/test/update")
-	public Users update( Users user ) {
+	public Users update(Users user) {
 		System.out.println(user.getUserNum());
-		
-		return userRepository.save(user); 
+
+		return userRepository.save(user);
 	}
+
 	@PostMapping("/test/delete/{num}")
 	public String delete(@PathVariable int num) {
-		
+
 		userRepository.deleteById(num);
-		  
-		return " \"delete\" : "+num;
+
+		return " \"delete\" : " + num;
 	}
 }

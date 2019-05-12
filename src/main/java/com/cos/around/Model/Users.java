@@ -13,20 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import lombok.Data;
 
 @Data
 @Entity
-@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
+//@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
 public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,32 +26,24 @@ public class Users {
 	private int userAge;
 	@Column(nullable = false)
 	private String userGender;
-	
 
-	
 	@ManyToOne
-	@JoinColumn(name="userSearchRegionNum")
+	@JoinColumn(name = "userSearchRegionNum")
 	private Region userSearchRegion;
-	
-	
 
-	@ManyToOne	
-	@JoinColumn(name="userRegionNum")
+	@ManyToOne
+	@JoinColumn(name = "userRegionNum")
 	private Region userRegion;
-	
+
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Heart> heart;
-	
-	
+
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Board> board;
-	
-	
-	
+
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Reply> reply;
-	
-	
+
 	@Column(nullable = false, length = 50)
 	private String userEmail;
 	@Column(nullable = false)
