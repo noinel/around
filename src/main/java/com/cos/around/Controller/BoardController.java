@@ -51,11 +51,12 @@ public class BoardController {
 			bDTO.setBoardCreateDate(b.getBoardCreateDate());
 			bDTO.setBoardUpdateDate(b.getBoardUpdateDate());
 			bDTO.setBoardRegion(b.getBoardRegion());
-//			FeelingDTO fDTO = new FeelingDTO();
-//			fDTO.setFeelingName(b.getFeeling().getFeelingName());
-//			fDTO.setFeelingNum(b.getFeeling().getFeelingNum());
-//			fDTO.setFeelingEmoticon(b.getFeeling().getFeelingEmoticon());
-			bDTO.setFeeling(b.getFeeling());
+			FeelingDTO fDTO = new FeelingDTO();
+			fDTO.setFeelingName(b.getFeeling().getFeelingName());
+			fDTO.setFeelingNum(b.getFeeling().getFeelingNum());
+			fDTO.setFeelingEmoticon(b.getFeeling().getFeelingEmoticon());
+			bDTO.setFeeling(fDTO);
+//			bDTO.setFeeling(b.getFeeling());
 			bDTO.setUser(b.getUser());
 			
 			bDTOs.add(bDTO);

@@ -22,6 +22,6 @@ public class BoardDTO {
 
 	private Users user;
 
-	private Feeling feeling;
+	private FeelingDTO feeling;
 
 }
