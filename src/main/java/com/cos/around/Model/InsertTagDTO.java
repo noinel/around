@@ -8,5 +8,5 @@ public class InsertTagDTO {
 	private int insertTagNum;
 
 	private TagsDTO tagDTO;
-	private BoardDTO boardDTO;
+	private MainDTO boardDTO;
 }

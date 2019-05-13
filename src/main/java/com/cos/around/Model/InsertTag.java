@@ -1,5 +1,7 @@
 package com.cos.around.Model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -19,13 +24,18 @@ public class InsertTag {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int insertTagNum;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"tagCreateDate","tagUpdateDate"})
 	@ManyToOne
 	@JoinColumn(name = "tagNum")
 	private Tags tag;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"boardContent","boardCreateDate","boardUpdateDate","user","boardRegion","feeling","heart","reply","insertTag"})
 	@ManyToOne
 	@JoinColumn(name = "boardNum")
 	private Board board;
+	
+	@CreationTimestamp
+	private LocalDate insertTagCreateDate;
+	@CreationTimestamp
+	private LocalDate insertTagUpdateDate;
 }

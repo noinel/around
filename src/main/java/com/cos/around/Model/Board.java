@@ -1,6 +1,6 @@
 package com.cos.around.Model;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,7 +14,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -30,34 +33,37 @@ public class Board {
 	@Column(nullable = false)
 	private String boardContent;
 
-	@Column(nullable = true)
-	private String boardAttach;
 
-	@Column(nullable = false)
-	private Timestamp boardCreateDate;
-	@Column(nullable = false)
-	private Timestamp boardUpdateDate;
 
-	@JsonIgnore
+	@CreationTimestamp
+	private LocalDate boardCreateDate;
+	@CreationTimestamp
+	private LocalDate boardUpdateDate;
+
+	@JsonIgnoreProperties({"userGender","userAge","userSearchRegion","userRegion","userEmail","userSearchMinAge","userSearchMaxAge","userActivate","userCreateDate","userUpdateDate","heart","reply","board"})
 	@ManyToOne
 	@JoinColumn(name = "userNum")
 	private Users user;
 
+	
 	@ManyToOne
 	@JoinColumn(name = "boardRegionNum")
 	private Region boardRegion;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"feelingCreateDate","feelingUpdateDate","board"})
 	@ManyToOne
 	@JoinColumn(name = "feelingNum")
 	private Feeling feeling;
 
+	
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<Heart> heart;
 
+	
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<Reply> reply;
 
+	
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<InsertTag> insertTag;
 }

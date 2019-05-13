@@ -1,5 +1,6 @@
 package com.cos.around.Model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,8 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -28,8 +32,13 @@ public class Feeling {
 	@Column(nullable = false)
 	private String feelingEmoticon;
 
+	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "feeling")
 	private List<Board> board;
 
+	@CreationTimestamp
+	private LocalDate feelingCreateDate;
+	@CreationTimestamp
+	private LocalDate feelingUpdateDate;
 }

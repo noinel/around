@@ -1,6 +1,7 @@
 package com.cos.around.Model;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,6 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -35,12 +40,15 @@ public class Users {
 	@JoinColumn(name = "userRegionNum")
 	private Region userRegion;
 
+	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Heart> heart;
 
+	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Board> board;
 
+	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Reply> reply;
 
@@ -52,8 +60,8 @@ public class Users {
 	private int userSearchMaxAge;
 	@Column(nullable = false)
 	private int userActivate;
-	@Column(nullable = false)
-	private Timestamp userCreateDate;
-	@Column(nullable = false)
-	private Timestamp userUpdateDate;
+	@CreationTimestamp
+	private LocalDate userCreateDate;
+	@CreationTimestamp
+	private LocalDate userUpdateDate;
 }

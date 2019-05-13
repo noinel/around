@@ -1,6 +1,6 @@
 package com.cos.around.Model;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,7 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -28,20 +30,24 @@ public class Reply {
 	private String replyContent;
 	@Column(nullable = false)
 	private int replyStatus;
-	@Column(nullable = false)
-	private Timestamp replyCreateDate;
-	@Column(nullable = false)
-	private Timestamp replyUpdateDate;
+	@CreationTimestamp
+	private LocalDate replyCreateDate;
+	@CreationTimestamp
+	private LocalDate replyUpdateDate;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({ "boardContent", "boardCreateDate", "boardUpdateDate", "user", "boardRegion", "feeling",
+			"heart", "reply", "insertTag" })
 	@ManyToOne
 	@JoinColumn(name = "boardNum")
 	private Board board;
-	@JsonIgnore
+
+	@JsonIgnoreProperties({ "replyContent", "replyStatus", "replyCreateDate", "replyUpdateDate", "board", "toReply",
+			"heart", "user" })
 	@ManyToOne
 	@JoinColumn(name = "toReplyNum")
 	private Reply toReply;
-	@JsonIgnore
+
+	@JsonIgnoreProperties({"userAge","userGender","userSearchRegion","userRegion","userEmail","userSearchMinAge","userSearchMaxAge","userActivate","userCreateDate","userUpdateDate","heart","reply","board"})
 	@ManyToOne
 	@JoinColumn(name = "userNum")
 	private Users user;

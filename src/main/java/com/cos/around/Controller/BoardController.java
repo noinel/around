@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.around.Model.Board;
-import com.cos.around.Model.BoardDTO;
+import com.cos.around.Model.MainDTO;
 import com.cos.around.Model.FeelingDTO;
 import com.cos.around.Repository.BoardRepository;
-import com.cos.around.Utils.MyUtils;
 
 @RestController
 @RequestMapping("/board")
@@ -34,34 +33,13 @@ public class BoardController {
 
 	@PostMapping("/test/save")
 	public Board save(@RequestBody Board board) {
-		board.setBoardCreateDate(MyUtils.getCurrentTime());
-		board.setBoardUpdateDate(MyUtils.getCurrentTime());
-		return boardRepository.save(board);
+			return boardRepository.save(board);
 	}
 	@GetMapping("/test/findall")
-	public List<BoardDTO> findAll() {
-		List<Board> boards = boardRepository.findAll();
-		List<BoardDTO> bDTOs = new ArrayList<BoardDTO>(); 
-		for(Board b: boards)
-		{
-			BoardDTO bDTO = new BoardDTO();
-			bDTO.setBoardNum(b.getBoardNum());
-			bDTO.setBoardAttach(b.getBoardAttach());
-			bDTO.setBoardContent(b.getBoardContent());
-			bDTO.setBoardCreateDate(b.getBoardCreateDate());
-			bDTO.setBoardUpdateDate(b.getBoardUpdateDate());
-			bDTO.setBoardRegion(b.getBoardRegion());
-			FeelingDTO fDTO = new FeelingDTO();
-			fDTO.setFeelingName(b.getFeeling().getFeelingName());
-			fDTO.setFeelingNum(b.getFeeling().getFeelingNum());
-			fDTO.setFeelingEmoticon(b.getFeeling().getFeelingEmoticon());
-			bDTO.setFeeling(fDTO);
-//			bDTO.setFeeling(b.getFeeling());
-			bDTO.setUser(b.getUser());
-			
-			bDTOs.add(bDTO);
-		}
-		return  bDTOs;
+	public List<Board> findAll() {
+		
+		return boardRepository.findAll();
+		
 	}
 	
 	

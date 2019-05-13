@@ -18,7 +18,7 @@ public class ReplyDTO {
 
 	private Timestamp replyUpdateDate;
 
-	private BoardDTO boardDTO;
+	private MainDTO boardDTO;
 	private ReplyDTO toReplyDTO;
 	private UsersDTO userDTO;
 

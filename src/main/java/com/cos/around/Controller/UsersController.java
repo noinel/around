@@ -27,8 +27,7 @@ public class UsersController {
 	public Users save(@RequestBody Users user) {
 
 		user.setUserActivate(1);
-		user.setUserCreateDate(MyUtils.getCurrentTime());
-		user.setUserUpdateDate(MyUtils.getCurrentTime());
+	
 		return userRepository.save(user);
 	}
 

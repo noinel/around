@@ -1,5 +1,6 @@
 package com.cos.around.Model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -27,4 +29,9 @@ public class Tags {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "tag")
 	private List<InsertTag> insertTag;
+	
+	@CreationTimestamp
+	private LocalDate tagCreateDate;
+	@CreationTimestamp
+	private LocalDate tagUpdateDate;
 }
