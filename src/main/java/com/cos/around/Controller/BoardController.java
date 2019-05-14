@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.around.Model.Board;
+import com.cos.around.Model.InsertTag;
 import com.cos.around.Model.MainDTO;
-import com.cos.around.Model.FeelingDTO;
+import com.cos.around.Model.Tags;
 import com.cos.around.Repository.BoardRepository;
+import com.cos.around.Repository.InsertTagRepository;
+import com.cos.around.Repository.TagsRepository;
 
 @RestController
 @RequestMapping("/board")
@@ -24,7 +27,15 @@ public class BoardController {
 
 	@Autowired
 	BoardRepository boardRepository;
-
+	
+	@Autowired
+	TagsRepository tagsRepository;
+	
+	@Autowired
+	InsertTagRepository insertTagRepository;
+	
+	
+	
 	@GetMapping("/test")
 	@ResponseBody
 	public String test() {
@@ -33,8 +44,35 @@ public class BoardController {
 
 	@PostMapping("/test/save")
 	public Board save(@RequestBody Board board) {
-			return boardRepository.save(board);
+		System.out.println(board);	
+//		List<String> tagNames = new ArrayList<String>();
+		List<InsertTag> insTags= board.getInsertTag();
+//		for(InsertTag insTag : insTags) {
+//			String tagName = insTag.getTag().getTagName();
+//			tagNames.add(tagName);
+//		}
+//		int len = tagNames.size();
+		int len = insTags.size();
+		for(int i = 0; i< len ; i++)
+		{
+			Tags tag = insTags.get(i).getTag();
+			Optional<Tags> opTag = tagsRepository.findByTagName(tag.getTagName());
+			if(opTag.isPresent()) {
+				tag.setTagNum(opTag.get().getTagNum());
+			}else {
+				tagsRepository.save(tag);
+			}	
+		}
+		   Board result =    boardRepository.save(board);
+		   for(InsertTag insTag : insTags) {
+			   insTag.getBoard().setBoardNum(result.getBoardNum());
+			   insertTagRepository.save(insTag);
+			   
+		   }
+			return result;
 	}
+	
+	
 	@GetMapping("/test/findall")
 	public List<Board> findAll() {
 		
@@ -42,6 +80,45 @@ public class BoardController {
 		
 	}
 	
+	@GetMapping("/test/find/main")
+	public MainDTO mainDTO() {
+		
+		MainDTO mDTO = new MainDTO();
+		
+		Optional<Board> opR = boardRepository.findById(5);
+		
+		if (opR.isPresent()) {
+			
+			Board b = opR.get();
+			
+			mDTO.setBoardNum(b.getBoardNum());
+			
+			mDTO.setBoardContent(b.getBoardContent());
+			
+			mDTO.setBoardRegion(b.getBoardRegion());
+			
+			mDTO.setBoardCreateDate(b.getBoardCreateDate());
+			
+			mDTO.setBoardUpdateDate(b.getBoardUpdateDate());
+			
+			mDTO.setUser(b.getUser());
+			
+			mDTO.setHearts(b.getHeart());
+			
+			mDTO.setFeeling(b.getFeeling());
+			
+			return mDTO;
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+		return null;
+	}
 	
 
 	@GetMapping("/test/findby/{num}")

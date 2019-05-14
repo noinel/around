@@ -24,7 +24,7 @@ public class Tags {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int tagNum;
 
-	@Column(nullable = false, length = 60)
+	@Column(nullable = false, length = 60, unique = true)
 	private String tagName;
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "tag")
