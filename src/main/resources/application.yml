@@ -19,7 +19,8 @@ spring:
 #     SpringPhysicalNamingStrategy 변수명을 create_date 형식으로 만들어줌     
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties: 
-      hibernate.enable_lazy_load_no_trans: true    
+      hibernate.enable_lazy_load_no_trans: true
+      hibernate.format_sql: true            
     show-sql: true
     
     

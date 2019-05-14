@@ -41,8 +41,8 @@ public class Reply {
 	@JoinColumn(name = "boardNum")
 	private Board board;
 
-	@JsonIgnoreProperties({ "replyContent", "replyStatus", "replyCreateDate", "replyUpdateDate", "board", "toReply",
-			"heart", "user" })
+	@JsonIgnoreProperties({ "replyContent","replyStatus","replyCreateDate","replyUpdateDate","board", "toReply",
+			"heart","user"})
 	@ManyToOne
 	@JoinColumn(name = "toReplyNum")
 	private Reply toReply;
