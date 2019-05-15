@@ -1,6 +1,5 @@
 package com.cos.around.Model;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 

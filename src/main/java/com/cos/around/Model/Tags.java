@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
@@ -18,13 +20,21 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(
+		name="tags",
+		uniqueConstraints={
+			@UniqueConstraint(
+				columnNames={"tagName"}
+			)
+		}
+	)
 //@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
 public class Tags {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int tagNum;
 
-	@Column(nullable = false, length = 60, unique = true)
+	@Column(nullable = false, length = 60)
 	private String tagName;
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "tag")

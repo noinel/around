@@ -52,7 +52,12 @@ public class BoardController {
 //			tagNames.add(tagName);
 //		}
 //		int len = tagNames.size();
+		
+		if(insTags == null) {
+			return null;
+		}
 		int len = insTags.size();
+		
 		for(int i = 0; i< len ; i++)
 		{
 			Tags tag = insTags.get(i).getTag();
