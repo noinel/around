@@ -16,32 +16,29 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
-@Data
-@Entity
-@Table(
+	@Data
+	@Entity
+	@Table(
 		uniqueConstraints={
 			@UniqueConstraint(
 				columnNames={"feelingName"}
 			)
 		}
 	)
-//@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
+	
 public class Feeling {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int feelingNum;
-
+	
 	@Column(nullable = false, length = 60)
 	private String feelingName;
 	@Column(nullable = false)
 	private String feelingEmoticon;
 
-	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "feeling")
 	private List<Board> board;
@@ -50,4 +47,5 @@ public class Feeling {
 	private LocalDate feelingCreateDate;
 	@CreationTimestamp
 	private LocalDate feelingUpdateDate;
+
 }

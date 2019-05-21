@@ -32,8 +32,6 @@ public class Board {
 	@Column(nullable = false)
 	private String boardContent;
 
-
-
 	@CreationTimestamp
 	private LocalDate boardCreateDate;
 	@CreationTimestamp
@@ -54,7 +52,6 @@ public class Board {
 	@JoinColumn(name = "feelingNum")
 	private Feeling feeling;
 
-	
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<Heart> heart;
 
@@ -65,4 +62,10 @@ public class Board {
 	
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<InsertTag> insertTag;
+	
+	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+	private List<AttachFile> attachFile;
+	
+	
+	private String attachSearch; 
 }

@@ -24,7 +24,7 @@ public class InsertTag {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int insertTagNum;
 
-	@JsonIgnoreProperties({"tagCreateDate","tagUpdateDate"})
+	@JsonIgnoreProperties({"tagCreateDate","tagUpdateDate","insertTag"})
 	@ManyToOne
 	@JoinColumn(name = "tagNum")
 	private Tags tag;
