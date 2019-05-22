@@ -84,16 +84,6 @@ public class BoardController {
 
 		}
 		
-		if(!board.getAttachFile().isEmpty()){
-			List<AttachFile> aFiles = new ArrayList<AttachFile>();
-			aFiles=board.getAttachFile();
-			for(AttachFile file: aFiles) {
-				file.setBoard(result);
-				attachFileRepository.save(file);
-				
-			}
-		}
-		
 		
 		return result;
 	}
