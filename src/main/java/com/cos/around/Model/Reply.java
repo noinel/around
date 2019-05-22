@@ -35,7 +35,7 @@ public class Reply {
 	@CreationTimestamp
 	private LocalDate replyUpdateDate;
 
-	@JsonIgnoreProperties({ "boardContent", "boardCreateDate", "boardUpdateDate", "user", "boardRegion", "feeling",
+	@JsonIgnoreProperties({"attachFile","attachSearch","boardContent", "boardCreateDate", "boardUpdateDate", "user", "boardRegion", "feeling",
 			"heart", "reply", "insertTag" })
 	@ManyToOne
 	@JoinColumn(name = "boardNum")

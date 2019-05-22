@@ -37,7 +37,7 @@ public class Heart {
 	@JoinColumn(name = "userNum")
 	private Users user;
 
-	@JsonIgnoreProperties({"boardContent","boardCreateDate","boardUpdateDate","user","boardRegion","feeling","heart","reply","insertTag"})
+	@JsonIgnoreProperties({"attachFile","attachSearch","boardContent","boardCreateDate","boardUpdateDate","user","boardRegion","feeling","heart","reply","insertTag"})
 	@ManyToOne
 	@JoinColumn(name = "boardNum")
 	private Board board;
@@ -47,7 +47,7 @@ public class Heart {
 	@JoinColumn(name = "replyNum")
 	private Reply reply;
 
-	
+	//0 board, 1 reply
 	@Column(nullable = false)
 	private int heartStatus;
 	

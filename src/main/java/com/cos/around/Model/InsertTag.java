@@ -29,7 +29,7 @@ public class InsertTag {
 	@JoinColumn(name = "tagNum")
 	private Tags tag;
 
-	@JsonIgnoreProperties({"boardContent","boardCreateDate","boardUpdateDate","user","boardRegion","feeling","heart","reply","insertTag"})
+	@JsonIgnoreProperties({"attachFile","attachSearch","boardContent","boardCreateDate","boardUpdateDate","user","boardRegion","feeling","heart","reply","insertTag"})
 	@ManyToOne
 	@JoinColumn(name = "boardNum")
 	private Board board;

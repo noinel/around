@@ -27,7 +27,7 @@ public class AttachFile {
 	private String fileName;
 	private String filePath;
 	
-	@JsonIgnoreProperties({"boardContent","boardCreateDate","boardUpdateDate","user","boardRegion","feeling","heart","reply","insertTag"})
+	@JsonIgnoreProperties({"boardContent","boardCreateDate","boardUpdateDate","user","boardRegion","attachFile","attachSearch","feeling","heart","reply","insertTag"})
 	@ManyToOne
 	@JoinColumn(name = "board")
 	private Board board;
