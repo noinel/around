@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cos.around.Model.AttachFile;
 import com.cos.around.Model.Board;
 import com.cos.around.Model.InsertTag;
-import com.cos.around.Model.MainDTO;
 import com.cos.around.Model.Tags;
+import com.cos.around.Model.Users;
 import com.cos.around.Repository.AttachFileRepository;
 import com.cos.around.Repository.BoardRepository;
 import com.cos.around.Repository.InsertTagRepository;
@@ -39,7 +39,7 @@ public class BoardController {
 
 	@Autowired
 	InsertTagRepository insertTagRepository;
-	
+
 	@Autowired
 	AttachFileRepository attachFileRepository;
 
@@ -76,15 +76,14 @@ public class BoardController {
 		}
 		Optional<Board> optionalBoard = Optional.ofNullable(board);
 		Board result = boardService.create(optionalBoard);
-		
+
 		for (InsertTag insTag : insTags) {
 
 			insTag.getBoard().setBoardNum(result.getBoardNum());
 			insertTagRepository.save(insTag);
 
 		}
-		
-		
+
 		return result;
 	}
 
@@ -95,38 +94,20 @@ public class BoardController {
 
 	}
 
-	@GetMapping("/test/find/main")
-	public MainDTO mainDTO() {
+	@PostMapping("/test/find/main")
+	public List<Board> main(@RequestBody Users user) {
+		System.out.println(user);
 
-		MainDTO mDTO = new MainDTO();
+		Optional<List<Board>> opR = boardService.findSearchBoard(user);
 
-		Optional<Board> opR = boardRepository.findById(5);
-
+		
+		
 		if (opR.isPresent()) {
-
-			Board b = opR.get();
-
-			mDTO.setBoardNum(b.getBoardNum());
-
-			mDTO.setBoardContent(b.getBoardContent());
-
-			mDTO.setBoardRegion(b.getBoardRegion());
-
-			mDTO.setBoardCreateDate(b.getBoardCreateDate());
-
-			mDTO.setBoardUpdateDate(b.getBoardUpdateDate());
-
-			mDTO.setUser(b.getUser());
-
-			mDTO.setHearts(b.getHeart());
-
-			mDTO.setFeeling(b.getFeeling());
-
-			return mDTO;
-
-		}
-
+			List<Board> boards = opR.get();
+			return boards;
+		}else {
 		return null;
+		}
 	}
 
 	@GetMapping("/test/findby/{num}")

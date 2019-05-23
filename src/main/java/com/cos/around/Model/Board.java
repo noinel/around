@@ -37,17 +37,18 @@ public class Board {
 	@CreationTimestamp
 	private LocalDate boardUpdateDate;
 
-	@JsonIgnoreProperties({"userGender","userAge","userSearchRegion","userRegion","userEmail","userSearchMinAge","userSearchMaxAge","userActivate","userCreateDate","userUpdateDate","heart","reply","board"})
+	@JsonIgnoreProperties({ "bookMark", "subscribe", "userGender", "userAge", "userSearchRegion", "userRegion",
+			"userEmail", "userSearchMinAge", "userSearchMaxAge", "userActivate", "userCreateDate", "userUpdateDate",
+			"heart", "reply", "board" })
 	@ManyToOne
 	@JoinColumn(name = "userNum")
 	private Users user;
 
-	
 	@ManyToOne
 	@JoinColumn(name = "boardRegionNum")
 	private Region boardRegion;
 
-	@JsonIgnoreProperties({"feelingCreateDate","feelingUpdateDate","board"})
+	@JsonIgnoreProperties({ "feelingCreateDate", "feelingUpdateDate", "board" })
 	@ManyToOne
 	@JoinColumn(name = "feelingNum")
 	private Feeling feeling;
@@ -55,17 +56,14 @@ public class Board {
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<Heart> heart;
 
-	
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<Reply> reply;
 
-	
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<InsertTag> insertTag;
-	
+
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<AttachFile> attachFile;
-	
-	
-	private String attachSearch; 
+
+	private String attachSearch;
 }

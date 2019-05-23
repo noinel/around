@@ -18,12 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
-@Table(
-		uniqueConstraints= {
-			@UniqueConstraint(columnNames={"userNum","replyNum"}),
-			@UniqueConstraint(columnNames={"userNum","boardNum"})
-		}
-		)
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "userNum", "replyNum" }),
+		@UniqueConstraint(columnNames = { "userNum", "boardNum" }) })
 @Data
 @Entity
 //@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
@@ -32,25 +28,29 @@ public class Heart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int heartNum;
 
-	@JsonIgnoreProperties({"userAge","userGender","userSearchRegion","userRegion","userEmail","userSearchMinAge","userSearchMaxAge","userActivate","userCreateDate","userUpdateDate","heart","reply","board"})
+	@JsonIgnoreProperties({ "bookMark", "subscribe", "userGender", "userAge", "userSearchRegion", "userRegion",
+			"userEmail", "userSearchMinAge", "userSearchMaxAge", "userActivate", "userCreateDate", "userUpdateDate",
+			"heart", "reply", "board" })
 	@ManyToOne
 	@JoinColumn(name = "userNum")
 	private Users user;
 
-	@JsonIgnoreProperties({"attachFile","attachSearch","boardContent","boardCreateDate","boardUpdateDate","user","boardRegion","feeling","heart","reply","insertTag"})
+	@JsonIgnoreProperties({ "bookMark", "attachFile", "attachSearch", "boardContent", "boardCreateDate",
+			"boardUpdateDate", "user", "boardRegion", "feeling", "heart", "reply", "insertTag" })
 	@ManyToOne
 	@JoinColumn(name = "boardNum")
 	private Board board;
 
-	@JsonIgnoreProperties({"replyContent","replyStatus","replyCreateDate","replyUpdateDate","board","toReply","user","heart"})
+	@JsonIgnoreProperties({ "replyContent", "replyStatus", "replyCreateDate", "replyUpdateDate", "board", "toReply",
+			"user", "heart" })
 	@ManyToOne
 	@JoinColumn(name = "replyNum")
 	private Reply reply;
 
-	//0 board, 1 reply
+	// 0 board, 1 reply
 	@Column(nullable = false)
 	private int heartStatus;
-	
+
 	@CreationTimestamp
 	private LocalDate heartCreateDate;
 	@CreationTimestamp

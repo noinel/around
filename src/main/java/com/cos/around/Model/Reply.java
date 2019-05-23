@@ -35,19 +35,21 @@ public class Reply {
 	@CreationTimestamp
 	private LocalDate replyUpdateDate;
 
-	@JsonIgnoreProperties({"attachFile","attachSearch","boardContent", "boardCreateDate", "boardUpdateDate", "user", "boardRegion", "feeling",
-			"heart", "reply", "insertTag" })
+	@JsonIgnoreProperties({ "bookMark", "attachFile", "attachSearch", "boardContent", "boardCreateDate",
+			"boardUpdateDate", "user", "boardRegion", "feeling", "heart", "reply", "insertTag" })
 	@ManyToOne
 	@JoinColumn(name = "boardNum")
 	private Board board;
 
-	@JsonIgnoreProperties({ "replyContent","replyStatus","replyCreateDate","replyUpdateDate","board", "toReply",
-			"heart","user"})
+	@JsonIgnoreProperties({ "replyContent", "replyStatus", "replyCreateDate", "replyUpdateDate", "board", "toReply",
+			"heart", "user" })
 	@ManyToOne
 	@JoinColumn(name = "toReplyNum")
 	private Reply toReply;
 
-	@JsonIgnoreProperties({"userAge","userGender","userSearchRegion","userRegion","userEmail","userSearchMinAge","userSearchMaxAge","userActivate","userCreateDate","userUpdateDate","heart","reply","board"})
+	@JsonIgnoreProperties({ "bookMark", "subscribe", "userGender", "userAge", "userSearchRegion", "userRegion",
+			"userEmail", "userSearchMinAge", "userSearchMaxAge", "userActivate", "userCreateDate", "userUpdateDate",
+			"heart", "reply", "board" })
 	@ManyToOne
 	@JoinColumn(name = "userNum")
 	private Users user;

@@ -22,19 +22,20 @@ public class AttachFile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int attachNum;
-	
+
 	private String mimeType;
 	private String fileName;
 	private String filePath;
-	
-	@JsonIgnoreProperties({"boardContent","boardCreateDate","boardUpdateDate","user","boardRegion","attachFile","attachSearch","feeling","heart","reply","insertTag"})
+
+	@JsonIgnoreProperties({ "bookMark", "attachFile", "attachSearch", "boardContent", "boardCreateDate",
+			"boardUpdateDate", "user", "boardRegion", "feeling", "heart", "reply", "insertTag" })
 	@ManyToOne
-	@JoinColumn(name = "board")
+	@JoinColumn(name = "boardNum")
 	private Board board;
-	
+
 	@CreationTimestamp
 	private LocalDate attachCreateDate;
 	@CreationTimestamp
 	private LocalDate attachUpdateDate;
-	
+
 }

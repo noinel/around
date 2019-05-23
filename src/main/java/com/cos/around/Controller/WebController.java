@@ -17,10 +17,7 @@ public class WebController {
 	
 	@Autowired
 	BoardRepository boardRepository;
-	
-	
-	
-	
+		
 	@GetMapping
 	public String main(Model model) {
 		List<Board> boards= boardRepository.findAll();

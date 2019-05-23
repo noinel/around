@@ -40,7 +40,12 @@ public class Users {
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Heart> heart;
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<BookMark> bookMark;
 
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Subscribe> subscribe;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Board> board;
@@ -48,7 +53,7 @@ public class Users {
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Reply> reply;
-
+	
 	@Column(nullable = false, length = 50)
 	private String userEmail;
 	@Column(nullable = false)

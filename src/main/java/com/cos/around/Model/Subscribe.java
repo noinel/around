@@ -11,32 +11,30 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
 @Data
 @Entity
-//@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
-public class InsertTag {
+public class Subscribe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int insertTagNum;
+	private int subscribeNum;
 
-	@JsonIgnoreProperties({ "tagCreateDate", "tagUpdateDate", "insertTag", "subscribe" })
+	@JsonIgnoreProperties({"tagCreateDate","tagUpdateDate","insertTag","subscribe"})
 	@ManyToOne
 	@JoinColumn(name = "tagNum")
 	private Tags tag;
-
-	@JsonIgnoreProperties({ "bookMark", "attachFile", "attachSearch", "boardContent", "boardCreateDate",
-			"boardUpdateDate", "user", "boardRegion", "feeling", "heart", "reply", "insertTag" })
+	
+	@JsonIgnoreProperties({"bookMark","subscribe","userGender", "userAge", "userSearchRegion", "userRegion", "userEmail", "userSearchMinAge",
+			"userSearchMaxAge", "userActivate", "userCreateDate", "userUpdateDate", "heart", "reply", "board" })
 	@ManyToOne
-	@JoinColumn(name = "boardNum")
-	private Board board;
+	@JoinColumn(name = "userNum")
+	private Users user;
 
 	@CreationTimestamp
-	private LocalDate insertTagCreateDate;
+	private LocalDate subscribeCreateDate;
 	@CreationTimestamp
-	private LocalDate insertTagUpdateDate;
+	private LocalDate subscribeUpdateDate;
 }
