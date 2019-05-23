@@ -20,19 +20,19 @@ public class RegionController {
 	@Autowired
 	RegionRepository regionRepository;
 
-	@PostMapping("/test/save")
+	@PostMapping("/save")
 	public Region save(Region region) {
 
 		return regionRepository.save(region);
 	}
 
-	@GetMapping("/test/findall")
+	@GetMapping("/findall")
 	public List<Region> findAll() {
 
 		return regionRepository.findAll();
 	}
 
-	@GetMapping("/test/findby/{num}")
+	@GetMapping("/findby/{num}")
 	public Region findByID(@PathVariable int num) {
 
 		Optional<Region> opR = regionRepository.findById(num);
@@ -44,13 +44,13 @@ public class RegionController {
 
 	}
 
-	@PostMapping("/test/update")
+	@PostMapping("/update")
 	public Region update(Region region) {
 
 		return regionRepository.save(region);
 	}
 
-	@PostMapping("/test/delete/{num}")
+	@PostMapping("/delete/{num}")
 	public String delete(@PathVariable int num) {
 
 		regionRepository.deleteById(num);

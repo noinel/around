@@ -21,19 +21,19 @@ public class TagsController {
 	@Autowired
 	TagsRepository tagRepository;
 
-	@PostMapping("/test/save")
+	@PostMapping("/save")
 	public Tags save(@RequestBody Tags tag) {
 
 		return tagRepository.save(tag);
 	}
 
-	@GetMapping("/test/findall")
+	@GetMapping("/findall")
 	public List<Tags> findAll() {
 
 		return tagRepository.findAll();
 	}
 
-	@GetMapping("/test/findby/{num}")
+	@GetMapping("/findby/{num}")
 	public Tags findByID(@PathVariable int num) {
 
 		Optional<Tags> opR = tagRepository.findById(num);
@@ -45,13 +45,13 @@ public class TagsController {
 
 	}
 
-	@PostMapping("/test/update")
+	@PostMapping("/update")
 	public Tags update(Tags tag) {
 
 		return tagRepository.save(tag);
 	}
 
-	@PostMapping("/test/delete/{num}")
+	@PostMapping("/delete/{num}")
 	public String delete(@PathVariable int num) {
 
 		tagRepository.deleteById(num);

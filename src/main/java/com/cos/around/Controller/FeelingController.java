@@ -21,19 +21,19 @@ public class FeelingController {
 	@Autowired
 	FeelingRepository feelingRepository;
 
-	@PostMapping("/test/save")
+	@PostMapping("/save")
 	public Feeling save(@RequestBody Feeling feeling) {
 
 		return feelingRepository.save(feeling);
 	}
 
-	@GetMapping("/test/findall")
+	@GetMapping("/findall")
 	public List<Feeling> findAll() {
 
 		return feelingRepository.findAll();
 	}
 
-	@GetMapping("/test/findby/{num}")
+	@GetMapping("/findby/{num}")
 	public Feeling findByID(@PathVariable int num) {
 
 		Optional<Feeling> opR = feelingRepository.findById(num);
@@ -45,13 +45,13 @@ public class FeelingController {
 
 	}
 
-	@PostMapping("/test/update")
+	@PostMapping("/update")
 	public Feeling update(Feeling feeling) {
 
 		return feelingRepository.save(feeling);
 	}
 
-	@PostMapping("/test/delete/{num}")
+	@PostMapping("/delete/{num}")
 	public String delete(@PathVariable int num) {
 
 		feelingRepository.deleteById(num);

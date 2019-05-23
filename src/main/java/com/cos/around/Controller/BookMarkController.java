@@ -32,7 +32,7 @@ public class BookMarkController {
 		return bookMarkRepository.findAll();
 	}
 
-	@GetMapping("/test/findby/{num}")
+	@GetMapping("/findby/{num}")
 	public BookMark findByID(@PathVariable int num) {
 
 		Optional<BookMark> opR = bookMarkRepository.findById(num);
@@ -44,13 +44,13 @@ public class BookMarkController {
 
 	}
 
-	@PostMapping("/test/update")
+	@PostMapping("/update")
 	public BookMark update(BookMark bookMark) {
 
 		return bookMarkRepository.save(bookMark);
 	}
 
-	@PostMapping("/test/delete/{num}")
+	@PostMapping("/delete/{num}")
 	public String delete(@PathVariable int num) {
 
 		bookMarkRepository.deleteById(num);

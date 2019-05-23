@@ -49,7 +49,7 @@ public class BoardController {
 		return "test";
 	}
 
-	@PostMapping("/test/save")
+	@PostMapping("/save")
 	public Board save(@RequestBody Board board) {
 		System.out.println(board);
 //		List<String> tagNames = new ArrayList<String>();
@@ -87,14 +87,14 @@ public class BoardController {
 		return result;
 	}
 
-	@GetMapping("/test/findall")
+	@GetMapping("/findall")
 	public List<Board> findAll() {
 
 		return boardRepository.findAll();
 
 	}
 
-	@PostMapping("/test/find/main")
+	@PostMapping("/find/main")
 	public List<Board> main(@RequestBody Users user) {
 		System.out.println(user);
 
@@ -110,7 +110,7 @@ public class BoardController {
 		}
 	}
 
-	@GetMapping("/test/findby/{num}")
+	@GetMapping("/findby/{num}")
 	public Board findByID(@PathVariable int num) {
 
 		Optional<Board> opR = boardRepository.findById(num);
@@ -124,13 +124,13 @@ public class BoardController {
 
 	}
 
-	@PostMapping("/test/update")
+	@PostMapping("/update")
 	public Board update(Board board) {
 
 		return boardRepository.save(board);
 	}
 
-	@PostMapping("/test/delete/{num}")
+	@PostMapping("/delete/{num}")
 	public String delete(@PathVariable int num) {
 
 		boardRepository.deleteById(num);

@@ -21,19 +21,19 @@ public class HeartController {
 	@Autowired
 	HeartRepository heartRepository;
 
-	@PostMapping("/test/save")
+	@PostMapping("/save")
 	public Heart save(@RequestBody Heart heart) {
 
 		return heartRepository.save(heart);
 	}
 
-	@GetMapping("/test/findall")
+	@GetMapping("/findall")
 	public List<Heart> findAll() {
 
 		return heartRepository.findAll();
 	}
 
-	@GetMapping("/test/findby/{num}")
+	@GetMapping("/findby/{num}")
 	public Heart findByID(@PathVariable int num) {
 
 		Optional<Heart> opR = heartRepository.findById(num);
@@ -45,14 +45,14 @@ public class HeartController {
 
 	}
 
-	@PostMapping("/test/update")
+	@PostMapping("/update")
 	public Heart update(Heart heart) {
 		System.out.println(heart.getHeartNum());
 
 		return heartRepository.save(heart);
 	}
 
-	@PostMapping("/test/delete/{num}")
+	@PostMapping("/delete/{num}")
 	public String delete(@PathVariable int num) {
 
 		heartRepository.deleteById(num);

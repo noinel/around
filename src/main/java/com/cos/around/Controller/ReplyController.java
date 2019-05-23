@@ -21,19 +21,19 @@ public class ReplyController {
 	@Autowired
 	ReplyRepository replyRepository;
 
-	@PostMapping("/test/save")
+	@PostMapping("/save")
 	public Reply save(@RequestBody Reply reply) {
 		System.out.println(reply);
 		return replyRepository.save(reply);
 	}
 
-	@GetMapping("/test/findall")
+	@GetMapping("/findall")
 	public List<Reply> findAll() {
 
 		return replyRepository.findAll();
 	}
 
-	@GetMapping("/test/findby/{num}")
+	@GetMapping("/findby/{num}")
 	public Reply findByID(@PathVariable int num) {
 
 		Optional<Reply> opR = replyRepository.findById(num);
@@ -45,13 +45,13 @@ public class ReplyController {
 
 	}
 
-	@PostMapping("/test/update")
+	@PostMapping("/update")
 	public Reply update(Reply reply) {
 		
 		return replyRepository.save(reply);
 	}
 
-	@PostMapping("/test/delete/{num}")
+	@PostMapping("/delete/{num}")
 	public String delete(@PathVariable int num) {
 
 		replyRepository.deleteById(num);

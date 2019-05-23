@@ -20,19 +20,19 @@ public class InsertTagController {
 	@Autowired
 	InsertTagRepository insertTagRepository;
 
-	@PostMapping("/test/save")
+	@PostMapping("/save")
 	public InsertTag save(InsertTag insertTag) {
 
 		return insertTagRepository.save(insertTag);
 	}
 
-	@GetMapping("/test/findall")
+	@GetMapping("/findall")
 	public List<InsertTag> findAll() {
 
 		return insertTagRepository.findAll();
 	}
 
-	@GetMapping("/test/findby/{num}")
+	@GetMapping("/findby/{num}")
 	public InsertTag findByID(@PathVariable int num) {
 
 		Optional<InsertTag> opR = insertTagRepository.findById(num);
@@ -44,13 +44,13 @@ public class InsertTagController {
 
 	}
 
-	@PostMapping("/test/update")
+	@PostMapping("/update")
 	public InsertTag update(InsertTag insertTag) {
 
 		return insertTagRepository.save(insertTag);
 	}
 
-	@PostMapping("/test/delete/{num}")
+	@PostMapping("/delete/{num}")
 	public String delete(@PathVariable int num) {
 
 		insertTagRepository.deleteById(num);

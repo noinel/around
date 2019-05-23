@@ -23,7 +23,7 @@ public class UsersController {
 	@Autowired
 	UsersRepository userRepository;
 
-	@PostMapping("/test/save")
+	@PostMapping("/save")
 	public Users save(@RequestBody Users user) {
 
 		user.setUserActivate(1);
@@ -31,13 +31,13 @@ public class UsersController {
 		return userRepository.save(user);
 	}
 
-	@GetMapping("/test/findall")
+	@GetMapping("/findall")
 	public List<Users> findAll() {
 
 		return userRepository.findAll();
 	}
 
-	@GetMapping("/test/findby/{num}")
+	@GetMapping("/findby/{num}")
 	public Users findByID(@PathVariable int num) {
 
 		Optional<Users> opR = userRepository.findById(num);
@@ -50,14 +50,14 @@ public class UsersController {
 
 	}
 
-	@PostMapping("/test/update")
+	@PostMapping("/update")
 	public Users update(Users user) {
 		System.out.println(user.getUserNum());
 
 		return userRepository.save(user);
 	}
 
-	@PostMapping("/test/delete/{num}")
+	@PostMapping("/delete/{num}")
 	public String delete(@PathVariable int num) {
 
 		userRepository.deleteById(num);
