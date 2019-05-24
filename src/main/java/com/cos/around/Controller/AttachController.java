@@ -27,7 +27,7 @@ public class AttachController {
 	@Autowired
 	private AttachFileRepository attachFileRepository;
 
-	@PostMapping("/upload")
+	@PostMapping("/save")
 	public String attachUpload(@RequestParam("file") List<MultipartFile> file, int boardNum) throws IOException {
 		int len = file.size();
 		List<AttachFile> aFiles = new ArrayList<AttachFile>();
@@ -52,5 +52,51 @@ public class AttachController {
 		attachFileRepository.saveAll(aFiles);
 		return "Ok";
 	}
-
+	
+	@PostMapping("/deleteall")
+	public int attachAllDelete(int boardNum){
+		
+		List<AttachFile> attachs= attachFileRepository.findByBoardBoardNum(boardNum);
+		int len= attachs.size();
+		try {
+			for(AttachFile attach : attachs) {
+				Path filePath= Paths.get(attach.getFilePath());
+				Files.delete(filePath);
+			}
+			attachFileRepository.deleteAll(attachs);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+			return len;
+	}
+	@PostMapping("/update")
+	public String attachUpdate(@RequestParam("file") List<MultipartFile> file, int boardNum) throws IOException {
+		List<AttachFile> attachs= attachFileRepository.findByBoardBoardNum(boardNum);
+		attachAllDelete(boardNum);
+		int len = file.size();
+		List<AttachFile> aFiles = new ArrayList<AttachFile>();
+		for (int i = 0; i < len; i++) 
+		{
+			
+			String extName
+			= file.get(i).getOriginalFilename().substring(file.get(i).getOriginalFilename().lastIndexOf("."), file.get(i).getOriginalFilename().length());
+			String fileName = "around_" + boardNum + "_" + LocalDate.now() + "_" +00+ i+extName;
+			Path filePath = Paths.get(PATH + fileName);
+			
+			Files.write(filePath, file.get(i).getBytes());
+			
+			AttachFile aFile = new AttachFile();
+			if(attachs.get(i)!= null) {
+			aFile.setAttachNum(attachs.get(i).getAttachNum());}
+			aFile.setMimeType(file.get(i).getContentType());
+			aFile.setFileName(fileName);
+			aFile.setFilePath("/attach/" + fileName);
+			aFile.setBoard(new Board());
+			aFile.getBoard().setBoardNum(boardNum);
+			aFiles.add(aFile);
+		}
+		attachFileRepository.saveAll(aFiles);
+		return "Ok";
+	}
 }

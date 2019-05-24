@@ -94,19 +94,17 @@ public class BoardController {
 
 	}
 
-	@PostMapping("/find/main")
+	@PostMapping("/main")
 	public List<Board> main(@RequestBody Users user) {
 		System.out.println(user);
 
-		Optional<List<Board>> opR = boardService.findSearchBoard(user);
+		List<Board> boards = boardService.findSearchBoard(user);
 
-		
-		
-		if (opR.isPresent()) {
-			List<Board> boards = opR.get();
+		if (boards.size() != 0) {
+
 			return boards;
-		}else {
-		return null;
+		} else {
+			return null;
 		}
 	}
 

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,12 +31,10 @@ public class Users {
 	@Column(nullable = false)
 	private String userGender;
 
-	@ManyToOne
-	@JoinColumn(name = "userSearchRegionNum")
+	@Enumerated(EnumType.STRING)
 	private Region userSearchRegion;
 
-	@ManyToOne
-	@JoinColumn(name = "userRegionNum")
+	@Enumerated(EnumType.STRING)
 	private Region userRegion;
 
 	

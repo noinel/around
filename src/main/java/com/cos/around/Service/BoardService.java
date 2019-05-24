@@ -1,5 +1,6 @@
 package com.cos.around.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cos.around.Model.Board;
+import com.cos.around.Model.Region;
 import com.cos.around.Model.Users;
 import com.cos.around.Repository.BoardRepository;
 
@@ -28,17 +30,23 @@ public class BoardService {
 		}
 	}
 
-	public Optional<List<Board>> findSearchBoard(Users user) {
-		Optional<List<Board>> opBoards;
+	public List<Board> findSearchBoard(Users user) {
+		List<Board> boards = new ArrayList<Board>();
 		int userSearchMinAge = user.getUserSearchMinAge();
 		int userSearchMaxAge = user.getUserSearchMaxAge();
-		int userSearchRegionNum = user.getUserSearchRegion().getRegionNum();
-		if (user.getUserSearchRegion().getRegionName().equals("전국")) {
-			opBoards = boardRepository.findSearchBoard(userSearchMinAge, userSearchMaxAge);
-		} else {
-			opBoards = boardRepository.findSearchBoard(userSearchRegionNum, userSearchMinAge, userSearchMaxAge);
+		Region userSearchRegion = user.getUserSearchRegion();
+
+		List<Board> bs = boardRepository.findSearchBoard(userSearchMinAge, userSearchMaxAge);
+		if (!user.getUserSearchRegion().toString().equals("전국")) {
+			
+			for (Board b : bs) {
+				if (b.getBoardRegion().equals(userSearchRegion)) {
+					boards.add(b);
+				}
+			}
 		}
-		return opBoards;
+
+		return boards;
 	}
 
 }

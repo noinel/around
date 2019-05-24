@@ -14,7 +14,7 @@ import com.cos.around.Model.BookMark;
 import com.cos.around.Repository.BookMarkRepository;
 
 @RestController
-@RequestMapping("/bookMark")
+@RequestMapping("/bookmark")
 public class BookMarkController {
 
 	@Autowired

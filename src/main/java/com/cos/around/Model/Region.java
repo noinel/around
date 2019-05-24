@@ -1,31 +1,7 @@
 package com.cos.around.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-import lombok.Data;
-
-@Table(
-		uniqueConstraints={
-			@UniqueConstraint(columnNames={"regionName"}
-			)
-		}
-	)
-@Data
-@Entity
-//@JsonIdentityInfo(generator =  ObjectIdGenerators.IntSequenceGenerator.class)
-public class Region {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int regionNum;
-
-	@Column(nullable = false, length = 60)
-	private String regionName;
+public enum Region {
+	전국, 서울특별시, 제주특별자치도, 세종특별자치시, 대전광역시, 광주광역시, 대구광역시, 부산광역시, 울산광역시, 인천광역시, 경기도, 강원도, 충청도, 경상도, 전라도
 
 
 }

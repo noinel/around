@@ -43,7 +43,6 @@ public class UsersController {
 		Optional<Users> opR = userRepository.findById(num);
 		if (opR.isPresent()) {
 			Users user = opR.get();
-			System.out.println(user.getUserRegion().getRegionName());
 			return user;
 		}
 		return null;
