@@ -52,38 +52,32 @@ public class BoardController {
 	@PostMapping("/save")
 	public Board save(@RequestBody Board board) {
 		System.out.println(board);
-//		List<String> tagNames = new ArrayList<String>();
 		List<InsertTag> insTags = board.getInsertTag();
-//		for(InsertTag insTag : insTags) {
-//			String tagName = insTag.getTag().getTagName();
-//			tagNames.add(tagName);
-//		}
-//		int len = tagNames.size();
 
-		if (insTags == null) {
-			return null;
-		}
-		int len = insTags.size();
+		if (insTags != null) {
+			int len = insTags.size();
 
-		for (int i = 0; i < len; i++) {
-			Tags tag = insTags.get(i).getTag();
-			Optional<Tags> opTag = tagsRepository.findByTagName(tag.getTagName());
-			if (opTag.isPresent()) {
-				tag.setTagNum(opTag.get().getTagNum());
-			} else {
-				tagsRepository.save(tag);
+			for (int i = 0; i < len; i++) {
+				Tags tag = insTags.get(i).getTag();
+				Optional<Tags> opTag = tagsRepository.findByTagName(tag.getTagName());
+				if (opTag.isPresent()) {
+					tag.setTagNum(opTag.get().getTagNum());
+				} else {
+					tagsRepository.save(tag);
+				}
 			}
 		}
 		Optional<Board> optionalBoard = Optional.ofNullable(board);
 		Board result = boardService.create(optionalBoard);
 
-		for (InsertTag insTag : insTags) {
+		if (insTags != null) {
+			for (InsertTag insTag : insTags) {
 
-			insTag.getBoard().setBoardNum(result.getBoardNum());
-			insertTagRepository.save(insTag);
+				insTag.getBoard().setBoardNum(result.getBoardNum());
+				insertTagRepository.save(insTag);
 
+			}
 		}
-
 		return result;
 	}
 

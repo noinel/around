@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,18 +15,20 @@ import com.cos.around.Model.InsertTag;
 import com.cos.around.Repository.InsertTagRepository;
 
 @RestController
-@RequestMapping("/insertTag")
+@RequestMapping("/inserttag")
 public class InsertTagController {
 
 	@Autowired
 	InsertTagRepository insertTagRepository;
 
 	@PostMapping("/save")
-	public InsertTag save(InsertTag insertTag) {
-
+	public InsertTag save(@RequestBody InsertTag insertTag) {
+		
+	
 		return insertTagRepository.save(insertTag);
 	}
 
+	
 	@GetMapping("/findall")
 	public List<InsertTag> findAll() {
 
