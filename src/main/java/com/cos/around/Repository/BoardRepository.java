@@ -16,4 +16,6 @@ public interface BoardRepository extends JpaRepository<Board, Integer>{
 	@Query(value="SELECT * FROM board where " + 
 			" userNum in(SELECT userNum from users where userAge between ?1 and ?2)", nativeQuery = true)
 		public List<Board> findSearchBoard(int userSearchMinAge, int userSearchMaxAge);
+	
+	
 }
