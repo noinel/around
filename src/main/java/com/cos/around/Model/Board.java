@@ -68,4 +68,6 @@ public class Board {
 	private List<AttachFile> attachFile;
 
 	private String attachSearch;
+	
+	private int reportCount;
 }
