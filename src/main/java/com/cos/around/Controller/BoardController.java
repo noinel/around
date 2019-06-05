@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cos.around.Model.AttachFile;
 import com.cos.around.Model.Board;
 import com.cos.around.Model.InsertTag;
+import com.cos.around.Model.Report;
 import com.cos.around.Model.Tags;
 import com.cos.around.Model.Users;
 import com.cos.around.Repository.AttachFileRepository;
 import com.cos.around.Repository.BoardRepository;
 import com.cos.around.Repository.InsertTagRepository;
+import com.cos.around.Repository.ReportRepository;
 import com.cos.around.Repository.TagsRepository;
 import com.cos.around.Service.BoardService;
 
@@ -42,13 +44,27 @@ public class BoardController {
 
 	@Autowired
 	AttachFileRepository attachFileRepository;
+	
+	@Autowired
+	ReportRepository reportRepository;
+	
 
 	@GetMapping("/test")
 	@ResponseBody
 	public String test() {
 		return "test";
 	}
-
+	@PostMapping("/report")
+	public String report(@RequestBody Report report) {
+		Optional<Report> reportO = reportRepository.findByBoardAndUser(report.getBoard(), report.getUser());
+		if(!reportO.isPresent()) {
+			
+		reportRepository.save(report);
+		}
+		
+		return "OK";
+	}
+	
 	@PostMapping("/save")
 	public Board save(@RequestBody Board board) {
 		System.out.println(board);

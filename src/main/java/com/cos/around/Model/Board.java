@@ -67,7 +67,9 @@ public class Board {
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<AttachFile> attachFile;
 
+	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+	private List<Report> report;
+	
 	private String attachSearch;
 	
-	private int reportCount;
 }
