@@ -49,11 +49,6 @@ public class BoardController {
 	ReportRepository reportRepository;
 	
 
-	@GetMapping("/test")
-	@ResponseBody
-	public String test() {
-		return "test";
-	}
 	@PostMapping("/report")
 	public String report(@RequestBody Report report) {
 		Optional<Report> reportO = reportRepository.findByBoardAndUser(report.getBoard(), report.getUser());
@@ -100,7 +95,7 @@ public class BoardController {
 	@GetMapping("/findall")
 	public List<Board> findAll() {
 
-		return boardRepository.findAll();
+		return boardRepository.findByBoardActivate(0);
 
 	}
 
@@ -121,7 +116,7 @@ public class BoardController {
 	@GetMapping("/findby/{num}")
 	public Board findByID(@PathVariable int num) {
 
-		Optional<Board> opR = boardRepository.findById(num);
+		Optional<Board> opR = boardRepository.findByBoardNumAndBoardActivate(num, 0);
 		if (opR.isPresent()) {
 			Board board = opR.get();
 

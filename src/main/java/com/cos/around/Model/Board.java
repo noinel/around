@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -71,5 +72,10 @@ public class Board {
 	private List<Report> report;
 	
 	private String attachSearch;
+	
+	private int boardActivate;
+	
+	@Transient
+	private int reportCount;
 	
 }
