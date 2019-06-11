@@ -54,6 +54,9 @@ public class Users {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Reply> reply;
 	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Report> report;
+	
 	@Column(nullable = false, length = 50)
 	private String userEmail;
 	@Column(nullable = false)

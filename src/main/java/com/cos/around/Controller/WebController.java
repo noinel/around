@@ -40,7 +40,7 @@ public class WebController {
 
 	@GetMapping("/findall")
 	public String main(Model model) {
-		List<Board> boards = boardRepository.findAll();
+		List<Board> boards = boardRepository.findByBoardActivate(0);
 		model.addAttribute("boards", boards);
 		return "main";
 	}
